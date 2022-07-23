@@ -1,4 +1,4 @@
-package com.github.derleymad.portifolio_app
+package com.github.derleymad.portifolio_app.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.databinding.ActivityMainBinding
 import com.github.derleymad.portifolio_app.model.Bio
 import com.github.derleymad.portifolio_app.utils.BioRequest

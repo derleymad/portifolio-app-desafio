@@ -7,4 +7,6 @@
     <string name="following">Seguindo</string>
     <string name="repo">Repositórios</string>
     <string name="zero">0</string>
+    <string name="search_title">Descubra os melhores\n<b>Portifólios do mundo </b> </string>
+    <string name="static_search_favorites">Seus projetos <b>favoritos</b></string>
 </resources>

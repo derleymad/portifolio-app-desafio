@@ -4,23 +4,22 @@ import android.accounts.NetworkErrorException
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import com.github.derleymad.portifolio_app.ui.MainActivity
-import com.github.derleymad.portifolio_app.model.Bio
-import org.json.JSONObject
+import com.github.derleymad.portifolio_app.model.Repos
+import com.github.derleymad.portifolio_app.ui.SearchActivity
+import org.json.JSONArray
 import java.io.InputStream
 import java.net.URL
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
-
-class BioRequest (private val callback: MainActivity){
+class RepoRequest (private val callback: SearchActivity){
 
     private val handler = Handler(Looper.getMainLooper())
     private val executor = Executors.newSingleThreadExecutor()
 
     interface Callback{
         fun onPreExecute()
-        fun onResult(bio: Bio)
+        fun onResult(repos:List<Repos>)
         fun onFailure(message: String)
     }
 
@@ -44,8 +43,8 @@ class BioRequest (private val callback: MainActivity){
                 stream = urlConnection.inputStream
                 val jsonAsString = stream.bufferedReader().use { it.readText() }
 
-                val bio = toBio(jsonAsString)
-                handler.post{callback.onResult(bio)}
+                val repos = toRepos(jsonAsString)
+                handler.post{callback.onResult(repos)}
 
             }catch (e:NetworkErrorException){
                 val message = e.message ?: "Erro desconhecido"
@@ -58,19 +57,30 @@ class BioRequest (private val callback: MainActivity){
         }
     }
 
-    private fun toBio(jsonAsString: String): Bio {
-        val jsonRoot = JSONObject(jsonAsString)
-        return Bio(
-            login = jsonRoot.getString("login"),
-            id = jsonRoot.getInt("id"),
-            avatar_url = jsonRoot.getString("avatar_url"),
-            repos_url = jsonRoot.getString("repos_url"),
-            company = jsonRoot.getString("company"),
-            location = jsonRoot.getString("location"),
-            bio = jsonRoot.getString("bio"),
-            public_repos = jsonRoot.getInt("public_repos"),
-            followers = jsonRoot.getInt("followers"),
-            following = jsonRoot.getInt("following")
-        )
+        private fun toRepos(jsonAsString: String): MutableList<Repos> {
+        var repos = mutableListOf<Repos>()
+
+        val jsonRoot = JSONArray(jsonAsString)
+
+        for (i in 0 until jsonRoot.length()) {
+            val jsonRepo = jsonRoot.getJSONObject(i)
+            val jsonOwner = jsonRepo.getJSONObject("owner")
+            val id = jsonRepo.getInt("id")
+            val name = jsonRepo.getString("name")
+            val avatarUrl = jsonOwner.getString("avatar_url")
+            val language = jsonRepo.getString("language")
+            var description = jsonRepo.getString("description")
+
+            repos.add(
+                Repos(
+                    id = id,
+                    name = name,
+                    avatarUrl = avatarUrl,
+                    language = language,
+                    description = description
+                )
+            )
+        }
+        return repos
     }
 }
