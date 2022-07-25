@@ -58,6 +58,12 @@ class BioRequest (private val callback: MainActivity){
         }
     }
 
+    fun execute_repo(){
+
+
+
+    }
+
     private fun toBio(jsonAsString: String): Bio {
         val jsonRoot = JSONObject(jsonAsString)
         return Bio(

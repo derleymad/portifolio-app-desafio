@@ -47,5 +47,7 @@ dependencies {
     //PICASSO
     implementation 'com.squareup.picasso:picasso:2.8'
 
+    //JSOUP
+    implementation 'org.jsoup:jsoup:1.15.2'
 
 }

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">portifolio-app</string>
     <string name="see">Ver</string>
-    <string name="complete_profile">Perfil Completo</string>
+    <string name="complete_profile">Perfil <b>Completo</b></string>
     <string name="tags_perfil">Bio | Projetos e Repositórios | Sobre</string>
     <string name="followers">Seguidores</string>
     <string name="following">Seguindo</string>
@@ -9,4 +9,6 @@
     <string name="zero">0</string>
     <string name="search_title">Descubra os melhores\n<b>Portifólios do mundo </b> </string>
     <string name="static_search_favorites">Seus projetos <b>favoritos</b></string>
+    <string name="status"><b>%1$s</b> seguidores <b>• %2$s</b> seguindo</string>
+    <string name="empty_repo">Esse perfil <b>não</b> possui <b>projetos</b></string>
 </resources>

@@ -16,8 +16,11 @@
         android:theme="@style/Theme.Portifolioapp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.RepoActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.SearchActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,9 +29,8 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"
+            android:parentActivityName=".ui.MainActivity"></activity>
     </application>
 
 </manifest>

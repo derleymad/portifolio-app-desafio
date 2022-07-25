@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.github.derleymad.portifolio_app.model.Repos
+import com.github.derleymad.portifolio_app.ui.MainActivity
 import com.github.derleymad.portifolio_app.ui.SearchActivity
 import org.json.JSONArray
 import java.io.InputStream
@@ -12,19 +13,19 @@ import java.net.URL
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
-class RepoRequest (private val callback: SearchActivity){
+class RepoRequest (private val callback: MainActivity){
 
     private val handler = Handler(Looper.getMainLooper())
     private val executor = Executors.newSingleThreadExecutor()
 
     interface Callback{
-        fun onPreExecute()
-        fun onResult(repos:List<Repos>)
-        fun onFailure(message: String)
+        fun onPreExecuteRepo()
+        fun onResultRepo(repos:List<Repos>)
+        fun onFailureRepo(message: String)
     }
 
     fun execute(url:String){
-        callback.onPreExecute()
+        callback.onPreExecuteRepo()
         executor.execute{
             var urlConnection: HttpsURLConnection? = null
             var stream : InputStream? = null
@@ -44,12 +45,12 @@ class RepoRequest (private val callback: SearchActivity){
                 val jsonAsString = stream.bufferedReader().use { it.readText() }
 
                 val repos = toRepos(jsonAsString)
-                handler.post{callback.onResult(repos)}
+                handler.post{callback.onResultRepo(repos)}
 
             }catch (e:NetworkErrorException){
                 val message = e.message ?: "Erro desconhecido"
                 Log.e("Teste",message,e)
-                handler.post { callback.onFailure(message)  }
+                handler.post { callback.onFailureRepo(message)  }
             }finally {
                 urlConnection?.disconnect()
                 stream?.close()
@@ -67,6 +68,7 @@ class RepoRequest (private val callback: SearchActivity){
             val jsonOwner = jsonRepo.getJSONObject("owner")
             val id = jsonRepo.getInt("id")
             val name = jsonRepo.getString("name")
+            val fullName = jsonRepo.getString("full_name")
             val avatarUrl = jsonOwner.getString("avatar_url")
             val language = jsonRepo.getString("language")
             var description = jsonRepo.getString("description")
@@ -75,6 +77,7 @@ class RepoRequest (private val callback: SearchActivity){
                 Repos(
                     id = id,
                     name = name,
+                    fullName = fullName,
                     avatarUrl = avatarUrl,
                     language = language,
                     description = description
