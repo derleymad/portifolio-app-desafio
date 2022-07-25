@@ -12,6 +12,7 @@ import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.databinding.ActivityMainBinding
 import com.github.derleymad.portifolio_app.model.Bio
 import com.github.derleymad.portifolio_app.model.Repos
+import com.github.derleymad.portifolio_app.ui.adapters.FavRepoAdapter
 import com.github.derleymad.portifolio_app.ui.adapters.RepoAdapter
 import com.github.derleymad.portifolio_app.utils.BioRequest
 import com.github.derleymad.portifolio_app.utils.RepoRequest
@@ -33,9 +34,14 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
 
         adapter = RepoAdapter(repos){
             val intent = Intent(this@MainActivity,RepoActivity::class.java)
-            intent.putExtra("full_name",it)
+            intent.putExtra("full_name",it.fullName)
+            intent.putExtra("description",it.description)
+            intent.putExtra("avatar_link",it.avatarUrl)
+            intent.putExtra("language",it.language)
+            intent.putExtra("name",it.name)
             startActivity(intent)
         }
+
         binding.rvRepos.adapter = adapter
         binding.rvRepos.layoutManager = LinearLayoutManager(this@MainActivity)
 
@@ -49,7 +55,6 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = null
-
 
     }
 
@@ -98,7 +103,6 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
         binding.progressBarBio.visibility = View.GONE
         finish()
     }
-
 
     //RESQUEST FROM REPO
 

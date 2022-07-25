@@ -4,20 +4,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.derleymad.portifolio_app.App
 import com.github.derleymad.portifolio_app.databinding.ActivitySearchBinding
-import com.github.derleymad.portifolio_app.model.Repos
-import com.github.derleymad.portifolio_app.ui.adapters.RepoAdapter
-import com.github.derleymad.portifolio_app.utils.RepoRequest
+import com.github.derleymad.portifolio_app.model.FavRepos
+import com.github.derleymad.portifolio_app.ui.adapters.FavRepoAdapter
 
 class SearchActivity : AppCompatActivity(){
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var adapter: RepoAdapter
-    private var repos = mutableListOf<Repos>()
+    private lateinit var adapter: FavRepoAdapter
+    private var repos = mutableListOf<FavRepos>()
+    private lateinit var linearlayout : LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -28,27 +28,28 @@ class SearchActivity : AppCompatActivity(){
             startActivity(intent)
         }
 
-        for (i in 0..5){
-            repos.add(Repos(i,"Projeto $i","Projeto/$i","urlfalsa.com","kotlin","null"))
-        }
-
-        adapter = RepoAdapter(repos)
+        adapter = FavRepoAdapter(repos)
         binding.rvFavoritos.adapter = adapter
-        binding.rvFavoritos.layoutManager = LinearLayoutManager(this@SearchActivity)
-
+        linearlayout = LinearLayoutManager(this@SearchActivity)
+        linearlayout.stackFromEnd = true
+        linearlayout.reverseLayout = true
+        binding.rvFavoritos.layoutManager = linearlayout
     }
 
-//    override fun onPreExecute() {
-//        Log.i("Teste","Pssou no preExecute")
-//    }
-//
-//    override fun onResult(repos: List<Repos>) {
-//        this.repos.clear()
-//        this.repos.addAll(repos)
-//        adapter.notifyDataSetChanged()
-//    }
-//
-//    override fun onFailure(message: String) {
-//        Toast.makeText(this@SearchActivity,"Falha ao buscar repositório $message",Toast.LENGTH_SHORT)
-//    }
+    override fun onResume() {
+        Thread{
+            val app = application as App
+            val dao = app.db.favDao()
+            val response = dao.getRegisterByType("repo")
+            Log.i("teste",response.toString())
+            runOnUiThread {
+                //atualizando adapter
+                repos.clear()
+                repos.addAll(response)
+                adapter.notifyDataSetChanged()
+            }
+        }.start()
+        adapter.notifyDataSetChanged()
+        super.onResume()
+    }
 }

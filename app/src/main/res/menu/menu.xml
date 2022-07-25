@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
     <item
-        android:id="@+id/menu_history"
+        android:id="@+id/menu_favoritos"
         app:showAsAction="always"
         android:icon="@drawable/ic_baseline_bookmark_add_24"
         android:title="history" />

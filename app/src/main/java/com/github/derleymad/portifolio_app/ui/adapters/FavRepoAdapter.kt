@@ -7,22 +7,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.derleymad.portifolio_app.R
+import com.github.derleymad.portifolio_app.model.FavRepos
 import com.github.derleymad.portifolio_app.model.Repos
 import com.google.android.material.card.MaterialCardView
 import com.squareup.picasso.Picasso
 
-class RepoAdapter(
-    private val repos:List<Repos>,
-    private var onRepoClickListener : ((Repos) -> Unit)? = null
+class FavRepoAdapter(
+    private val repos:List<FavRepos>,
+//    private var onRepoClickListener : ((Repos) -> Unit)? = null
 
-    ): RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
+): RecyclerView.Adapter<FavRepoAdapter.RepoViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoAdapter.RepoViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavRepoAdapter.RepoViewHolder{
         val view = LayoutInflater.from(parent.context).inflate(R.layout.repo_item,parent,false)
         return RepoViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RepoAdapter.RepoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavRepoAdapter.RepoViewHolder, position: Int) {
         val itemCurrent = repos[position]
         holder.bind(itemCurrent)
     }
@@ -32,16 +33,13 @@ class RepoAdapter(
     }
 
     inner class RepoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        fun bind (itemCurrent:Repos){
-
-            val link = "https://ui-avatars.com/api/?background=random&name=${itemCurrent.name}&size=100"
+        fun bind (itemCurrent:FavRepos){
             val tvTitleRepo = itemView.findViewById<TextView>(R.id.tv_title_repo)
-            val carViewContainer = itemView.findViewById<MaterialCardView>(R.id.cardview_repo_item)
             var tvDescRepo = itemView.findViewById<TextView>(R.id.tv_desc_repo)
             val tvLaguageRepo = itemView.findViewById<TextView>(R.id.tv_language_repo)
             val avatarImage = itemView.findViewById<ImageView>(R.id.img_avatar_repo)
 
-            tvTitleRepo.text = itemCurrent.name
+            tvTitleRepo.text = itemCurrent.full_name
             tvLaguageRepo.text = itemCurrent.language
             if(itemCurrent.description == "null"){
                 tvDescRepo.text = "Projeto sem descrição!"
@@ -50,17 +48,11 @@ class RepoAdapter(
             }
 
             Picasso.get()
-                .load(link)
+                .load(itemCurrent.avatarLink)
                 .placeholder(R.drawable.placeholder_repo)
                 .error(R.drawable.avatar_placeholder)
                 .into(avatarImage)
-
-            carViewContainer.setOnClickListener{
-                onRepoClickListener?.invoke(itemCurrent)
-            }
         }
     }
-
-
 
 }
