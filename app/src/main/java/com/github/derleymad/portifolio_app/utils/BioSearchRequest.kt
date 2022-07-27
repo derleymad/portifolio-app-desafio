@@ -5,7 +5,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.github.derleymad.portifolio_app.ui.MainActivity
-import com.github.derleymad.portifolio_app.model.Bio
+import com.github.derleymad.portifolio_app.model.SearchBio
+import com.github.derleymad.portifolio_app.ui.SearchActivity
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.InputStream
 import java.net.URL
@@ -13,14 +15,14 @@ import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
 
-class BioRequest (private val callback: MainActivity){
+ class BioSearchRequest (private val callback: SearchActivity){
 
     private val handler = Handler(Looper.getMainLooper())
     private val executor = Executors.newSingleThreadExecutor()
 
     interface Callback{
         fun onPreExecute()
-        fun onResult(bio: Bio)
+        fun onResult(search: List<SearchBio>)
         fun onFailure(message: String)
     }
 
@@ -44,10 +46,8 @@ class BioRequest (private val callback: MainActivity){
                 stream = urlConnection.inputStream
                 val jsonAsString = stream.bufferedReader().use { it.readText() }
 
-                    val bio = toBio(jsonAsString)
-                    handler.post{callback.onResult(bio)}
-
-
+                val search = toSearch(jsonAsString)
+                handler.post{callback.onResult(search)}
 
             }catch (e:NetworkErrorException){
                 val message = e.message ?: "Erro desconhecido"
@@ -60,20 +60,26 @@ class BioRequest (private val callback: MainActivity){
         }
     }
 
-    private fun toBio(jsonAsString: String): Bio {
+    private fun toSearch(jsonAsString: String): List<SearchBio> {
+        var search = mutableListOf<SearchBio>()
         val jsonRoot = JSONObject(jsonAsString)
-        return Bio(
-            login = jsonRoot.getString("login"),
-            id = jsonRoot.getInt("id"),
-            avatar_url = jsonRoot.getString("avatar_url"),
-            repos_url = jsonRoot.getString("repos_url"),
-            company = jsonRoot.getString("company"),
-            location = jsonRoot.getString("location"),
-            bio = jsonRoot.getString("bio"),
-            public_repos = jsonRoot.getInt("public_repos"),
-            followers = jsonRoot.getInt("followers"),
-            following = jsonRoot.getInt("following")
-        )
+
+        val jsonItems = jsonRoot.getJSONArray("items")
+
+        for(i in 0 until jsonItems.length()){
+            val userJson = jsonItems.getJSONObject(i)
+
+            search.add(
+                SearchBio(
+                    login = userJson.getString("login"),
+                    id = userJson.getInt("id"),
+                    avatar_url = userJson.getString("avatar_url")
+                )
+            )
+
+
+        }
+        return search
     }
 
 }

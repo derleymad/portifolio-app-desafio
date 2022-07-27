@@ -6,17 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.SearchActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="visible"
+        android:id="@+id/rv_search"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/search_item"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bio" />
+
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_search"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_people_portifolio_search"
-        app:layout_constraintDimensionRatio="3:2"
+        app:layout_constraintDimensionRatio="4:2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bio" />
+
 
     <TextView
         android:id="@+id/textView"
@@ -79,20 +93,19 @@
         android:text="@string/static_search_favorites"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/img_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavoritos"
         tools:listitem="@layout/repo_item"
-        android:padding="8dp"
         android:layout_width="match_parent"
+
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_static_favoritos"
-
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

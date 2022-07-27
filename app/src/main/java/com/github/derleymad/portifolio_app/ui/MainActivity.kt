@@ -107,15 +107,18 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
     //RESQUEST FROM REPO
 
     override fun onPreExecuteRepo() {
+        binding.progressBarRepo.visibility = View.VISIBLE
     }
 
     override fun onResultRepo(repos: List<Repos>) {
         this.repos.clear()
         this.repos.addAll(repos)
         adapter.notifyDataSetChanged()
+        binding.progressBarRepo.visibility = View.GONE
     }
 
     override fun onFailureRepo(message: String) {
         binding.imgNotFound.visibility = View.VISIBLE
+        binding.progressBarRepo.visibility = View.GONE
     }
 }

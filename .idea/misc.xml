@@ -6,12 +6,18 @@
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1405" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/avatar_placeholder.xml" value="0.1" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/background.xml" value="0.1785" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.147" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_baseline_bookmark_add_24.xml" value="0.147" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_baseline_bookmark_added_24.xml" value="0.147" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_baseline_content_paste_24.xml" value="0.147" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1405" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_baseline_person_24_gray.xml" value="0.1405" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.147" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_business.xml" value="0.1405" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_check.xml" value="0.1405" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_close.xml" value="0.1405" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1405" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.147" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_location.xml" value="0.1405" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_people_portifolio_search.xml" value="0.1405" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_people_search.xml" value="0.1035" />
@@ -19,19 +25,24 @@
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_person_search.xml" value="0.1035" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_right.xml" value="0.1" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_show_more_perfil.xml" value="0.1405" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_undraw_a_moment_to_relax_re_v5gv.xml" value="0.147" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_undraw_handcrafts_number_one.xml" value="0.192" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_undraw_handcrafts_pinned_file.xml" value="0.147" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_undraw_handcrafts_profile_info.xml" value="0.1405" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_undraw_handcrafts_space.xml" value="0.1405" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_undraw_handcrafts_user.xml" value="0.147" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_undraw_page_not_found.xml" value="0.147" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_wave.xml" value="0.2175" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/ic_wave_up.xml" value="0.2175" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/layer.xml" value="0.1" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/placeholder_repo.xml" value="0.1365" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/round_text_edit.xml" value="0.1035" />
-        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_repo.xml" value="0.15" />
-        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_search.xml" value="0.22" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_search.xml" value="0.33" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/repo_item.xml" value="0.25" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/repo_item_grid.xml" value="0.209375" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/search_item.xml" value="0.33" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/menu/menu.xml" value="0.5" />
       </map>
     </option>

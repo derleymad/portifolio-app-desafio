@@ -38,7 +38,7 @@ class RepoRequest (private val callback: MainActivity){
 
                 val statusCode = urlConnection.responseCode
                 Log.e("teste",statusCode.toString())
-                if(statusCode>400){
+                if(statusCode!=200){
                     throw NetworkErrorException("Erro ao buscar bio")
                 }
                 stream = urlConnection.inputStream
