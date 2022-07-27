@@ -37,14 +37,14 @@ class RepoAdapter(
             val link = "https://ui-avatars.com/api/?background=random&name=${itemCurrent.name}&size=100"
             val tvTitleRepo = itemView.findViewById<TextView>(R.id.tv_title_repo)
             val carViewContainer = itemView.findViewById<MaterialCardView>(R.id.cardview_repo_item)
-            var tvDescRepo = itemView.findViewById<TextView>(R.id.tv_desc_repo)
+            val tvDescRepo = itemView.findViewById<TextView>(R.id.tv_desc_repo)
             val tvLaguageRepo = itemView.findViewById<TextView>(R.id.tv_language_repo)
             val avatarImage = itemView.findViewById<ImageView>(R.id.img_avatar_repo)
 
             tvTitleRepo.text = itemCurrent.name
             tvLaguageRepo.text = itemCurrent.language
             if(itemCurrent.description == "null"){
-                tvDescRepo.text = "Projeto sem descrição!"
+                tvDescRepo.text = itemView.context.getString(R.string.no_description)
             }else{
                 tvDescRepo.text = itemCurrent.description
             }
@@ -60,7 +60,4 @@ class RepoAdapter(
             }
         }
     }
-
-
-
 }

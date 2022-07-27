@@ -8,8 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.model.FavRepos
-import com.github.derleymad.portifolio_app.model.Repos
-import com.google.android.material.card.MaterialCardView
 import com.squareup.picasso.Picasso
 
 class FavRepoAdapter(
@@ -35,14 +33,14 @@ class FavRepoAdapter(
     inner class RepoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind (itemCurrent:FavRepos){
             val tvTitleRepo = itemView.findViewById<TextView>(R.id.tv_title_repo)
-            var tvDescRepo = itemView.findViewById<TextView>(R.id.tv_desc_repo)
+            val tvDescRepo = itemView.findViewById<TextView>(R.id.tv_desc_repo)
             val tvLaguageRepo = itemView.findViewById<TextView>(R.id.tv_language_repo)
             val avatarImage = itemView.findViewById<ImageView>(R.id.img_avatar_repo)
 
             tvTitleRepo.text = itemCurrent.full_name
             tvLaguageRepo.text = itemCurrent.language
             if(itemCurrent.description == "null"){
-                tvDescRepo.text = "Projeto sem descrição!"
+                tvDescRepo.text = itemView.context.getString(R.string.no_description)
             }else{
                 tvDescRepo.text = itemCurrent.description
             }

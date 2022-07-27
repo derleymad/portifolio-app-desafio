@@ -37,15 +37,15 @@
                 android:id="@+id/imgAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/img_perfil"
                 android:src="@drawable/avatar_placeholder" />
-
         </androidx.cardview.widget.CardView>
-
 
         <ImageView
             android:id="@+id/img_not_found"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/static_not_found_search"
             android:src="@drawable/ic_undraw_page_not_found"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -70,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
+            android:contentDescription="@string/no_projects_img"
             android:src="@drawable/ic_undraw_handcrafts_space"
             android:visibility="gone"
             app:layout_constraintDimensionRatio="4:3"
@@ -114,10 +115,10 @@
             style="@style/TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_person_24"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textColor="@color/black"
             android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_person_24"
             app:layout_constraintEnd_toEndOf="@+id/img_number1"
             app:layout_constraintStart_toStartOf="@+id/img_number1"
             app:layout_constraintTop_toBottomOf="@+id/img_number1"
@@ -150,16 +151,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
-                android:drawableStart="@drawable/ic_location"
                 android:textSize="12sp"
+                app:drawableStartCompat="@drawable/ic_location"
+                tools:ignore="TextContrastCheck"
                 tools:text="Ceará" />
 
             <TextView
                 android:id="@+id/tv_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_business"
                 android:textSize="12sp"
+                app:drawableStartCompat="@drawable/ic_business"
+                tools:ignore="TextContrastCheck"
                 tools:text="UFCA" />
 
         </LinearLayout>
@@ -169,8 +172,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_baseline_person_24_gray"
             android:text="@string/status"
+            app:drawableStartCompat="@drawable/ic_baseline_person_24_gray"
             app:layout_constraintStart_toStartOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             tools:text="999 seguidores - 999 seguindo" />
@@ -179,12 +182,12 @@
             android:id="@+id/img_number1"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:contentDescription="@string/first_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.25"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
             app:srcCompat="@drawable/ic_undraw_handcrafts_number_one" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -198,7 +201,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/bio_toolbar"
         android:layout_width="match_parent"
@@ -206,8 +208,6 @@
         android:background="@color/black_transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

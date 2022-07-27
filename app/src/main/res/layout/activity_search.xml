@@ -7,30 +7,30 @@
     tools:context=".ui.SearchActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:visibility="visible"
         android:id="@+id/rv_search"
         android:layout_width="match_parent"
-        tools:listitem="@layout/search_item"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/img_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bio" />
+        app:layout_constraintTop_toBottomOf="@+id/search_bio"
+        tools:listitem="@layout/search_item" />
 
     <ImageView
         android:id="@+id/img_search"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/search_image"
         android:src="@drawable/ic_people_portifolio_search"
         app:layout_constraintDimensionRatio="4:2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bio" />
-
 
     <TextView
         android:id="@+id/textView"
@@ -54,7 +54,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:hint="Que tal procurar por derleymad?"
+        android:hint="@string/sugestion_search"
         app:boxCornerRadiusBottomEnd="32dp"
         app:boxCornerRadiusBottomStart="32dp"
         app:boxCornerRadiusTopEnd="32dp"
@@ -74,10 +74,11 @@
 
     <ImageButton
         android:id="@+id/search_btn"
-        android:layout_width="25dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="?attr/actionBarItemBackground"
+        android:contentDescription="@string/right_arrow"
         android:elevation="16dp"
         android:src="@drawable/ic_right"
         app:layout_constraintBottom_toBottomOf="@+id/search_bio"
@@ -97,15 +98,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavoritos"
-        tools:listitem="@layout/repo_item"
         android:layout_width="match_parent"
-
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_static_favoritos"
-        />
+        tools:listitem="@layout/repo_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

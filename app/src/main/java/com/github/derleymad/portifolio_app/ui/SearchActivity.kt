@@ -5,10 +5,8 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.GridView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.derleymad.portifolio_app.App
 import com.github.derleymad.portifolio_app.R
@@ -22,6 +20,7 @@ import com.github.derleymad.portifolio_app.utils.BioSearchRequest
 const val MAX_PER_SEARCH = 10
 
 class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
+
     private lateinit var binding: ActivitySearchBinding
     private lateinit var adapter: FavRepoAdapter
     private lateinit var adapterSearch: SearchAdapter
@@ -47,7 +46,7 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
             }
         } else {
             binding.searchBtn.setOnClickListener {
-                Toast.makeText(this@SearchActivity, "Network Not Available", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SearchActivity, getString(R.string.no_conection), Toast.LENGTH_LONG).show()
             }
             binding.imgSearch.setImageResource(R.drawable.ic_undraw_page_not_found)
         }
@@ -56,7 +55,6 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
         adapterSearch = SearchAdapter(search)
         binding.rvSearch.adapter = adapterSearch
         binding.rvSearch.layoutManager = LinearLayoutManager(this@SearchActivity)
-
 
         //FAVORITOS ADAPTER AND RECYCLER VIEW
         adapter = FavRepoAdapter(repos)
@@ -98,6 +96,6 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
     override fun onFailure(message: String) {
         binding.imgSearch.visibility = View.VISIBLE
         binding.rvSearch.visibility = View.GONE
-        Toast.makeText(this@SearchActivity,"Não foi possivel encontrar o perfil",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@SearchActivity,getString(R.string.bio_not_found),Toast.LENGTH_SHORT).show()
     }
 }

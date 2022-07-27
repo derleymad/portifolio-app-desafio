@@ -13,4 +13,5 @@
     <color name="light_brown">#F9D6A5</color>
     <color name="ice_light">#F5EAEA</color>
     <color name="black_transparent">#1A000000</color>
+    <color name="github_color_gray">#f7f8fa</color>
 </resources>

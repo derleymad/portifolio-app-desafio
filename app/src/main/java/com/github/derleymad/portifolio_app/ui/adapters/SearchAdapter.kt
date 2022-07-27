@@ -10,7 +10,8 @@ import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.model.SearchBio
 import com.squareup.picasso.Picasso
 
-class SearchAdapter(private val search: List<SearchBio>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter(private val search: List<SearchBio>) :
+    RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false)
         return SearchViewHolder(view)
@@ -37,9 +38,6 @@ class SearchAdapter(private val search: List<SearchBio>) : RecyclerView.Adapter<
                 .placeholder(R.drawable.avatar_placeholder)
                 .error(R.drawable.avatar_placeholder)
                 .into(imageAvatar)
-
         }
     }
-
-
 }

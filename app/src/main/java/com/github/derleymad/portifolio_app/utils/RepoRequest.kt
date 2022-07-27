@@ -4,61 +4,61 @@ import android.accounts.NetworkErrorException
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.model.Repos
 import com.github.derleymad.portifolio_app.ui.MainActivity
-import com.github.derleymad.portifolio_app.ui.SearchActivity
 import org.json.JSONArray
 import java.io.InputStream
 import java.net.URL
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
-class RepoRequest (private val callback: MainActivity){
+class RepoRequest(private val callback: MainActivity) {
 
     private val handler = Handler(Looper.getMainLooper())
     private val executor = Executors.newSingleThreadExecutor()
 
-    interface Callback{
+    interface Callback {
         fun onPreExecuteRepo()
-        fun onResultRepo(repos:List<Repos>)
+        fun onResultRepo(repos: List<Repos>)
         fun onFailureRepo(message: String)
     }
 
-    fun execute(url:String){
+    fun execute(url: String) {
         callback.onPreExecuteRepo()
-        executor.execute{
+        executor.execute {
             var urlConnection: HttpsURLConnection? = null
-            var stream : InputStream? = null
+            var stream: InputStream? = null
 
-            try{
+            try {
                 val requestURL = URL(url)
                 urlConnection = requestURL.openConnection() as HttpsURLConnection
                 urlConnection.readTimeout = 2000
                 urlConnection.connectTimeout = 2000
 
                 val statusCode = urlConnection.responseCode
-                Log.e("teste",statusCode.toString())
-                if(statusCode!=200){
-                    throw NetworkErrorException("Erro ao buscar bio")
+                Log.e("teste", statusCode.toString())
+                if (statusCode != 200) {
+                    throw NetworkErrorException(callback.getString(R.string.bio_not_found))
                 }
                 stream = urlConnection.inputStream
                 val jsonAsString = stream.bufferedReader().use { it.readText() }
 
                 val repos = toRepos(jsonAsString)
-                handler.post{callback.onResultRepo(repos)}
+                handler.post { callback.onResultRepo(repos) }
 
-            }catch (e:NetworkErrorException){
-                val message = e.message ?: "Erro desconhecido"
-                Log.e("Teste",message,e)
-                handler.post { callback.onFailureRepo(message)  }
-            }finally {
+            } catch (e: NetworkErrorException) {
+                val message = e.message ?: callback.getString(R.string.uknown_error)
+                Log.e("Teste", message, e)
+                handler.post { callback.onFailureRepo(message) }
+            } finally {
                 urlConnection?.disconnect()
                 stream?.close()
             }
         }
     }
 
-        private fun toRepos(jsonAsString: String): MutableList<Repos> {
+    private fun toRepos(jsonAsString: String): MutableList<Repos> {
         var repos = mutableListOf<Repos>()
 
         val jsonRoot = JSONArray(jsonAsString)

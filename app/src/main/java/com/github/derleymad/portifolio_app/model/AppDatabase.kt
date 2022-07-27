@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-
 
 @Database(entities = [FavRepos::class], version = 1)
 //Padrão Singleton esse objeto aki em baixo vai ser ÚNICO pois será armazenado em memória...
