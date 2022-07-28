@@ -13,7 +13,6 @@ import java.net.URL
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
-
 class BioRequest(private val callback: MainActivity) {
 
     private val handler = Handler(Looper.getMainLooper())

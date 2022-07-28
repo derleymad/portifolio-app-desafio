@@ -7,8 +7,8 @@ import androidx.room.Query
 @Dao
 interface FavDao {
     @Insert
-    fun insert(fav: FavRepos)
+    fun insert(fav: BioFav)
 
-    @Query("SELECT * FROM FavRepos WHERE type = :type ")
-    fun getRegisterByType(type:String) : List<FavRepos>
+    @Query("SELECT * FROM BioFav WHERE type = :type")
+    fun getRegisterByType(type:String) : List<BioFav>
 }

@@ -37,13 +37,16 @@
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/layer.xml" value="0.1" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/placeholder_repo.xml" value="0.1365" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/drawable/round_text_edit.xml" value="0.1035" />
-        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_repo.xml" value="0.15" />
-        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_search.xml" value="0.33" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/activity_search.xml" value="0.25" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/avatar_item.xml" value="0.33" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/repo_item.xml" value="0.25" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/repo_item_favoritos.xml" value="0.33" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/repo_item_grid.xml" value="0.209375" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/layout/search_item.xml" value="0.33" />
         <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/menu/menu.xml" value="0.5" />
+        <entry key="..\:/Users/wm/Desktop/Projetos/portifolioapp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.147" />
       </map>
     </option>
   </component>

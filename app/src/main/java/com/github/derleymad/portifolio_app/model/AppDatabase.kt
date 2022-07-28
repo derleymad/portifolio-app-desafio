@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [FavRepos::class], version = 1)
+@Database(entities = [BioFav::class], version = 1)
 //Padrão Singleton esse objeto aki em baixo vai ser ÚNICO pois será armazenado em memória...
 
 abstract class AppDatabase : RoomDatabase() {

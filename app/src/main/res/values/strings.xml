@@ -6,9 +6,10 @@
     <string name="followers">Seguidores</string>
     <string name="following">Seguindo</string>
     <string name="repo">Repositórios</string>
+    <string name="repo_numbers">%1$s Repo</string>
     <string name="zero">0</string>
     <string name="search_title">Descubra os melhores\n<b>Portifólios do mundo </b> </string>
-    <string name="static_search_favorites">Seus projetos <b>favoritos</b></string>
+    <string name="static_search_favorites">Seus portifólios <b>favoritos</b></string>
     <string name="status"><b>%1$s</b> seguidores <b>• %2$s</b> seguindo</string>
     <string name="empty_repo">Esse perfil <b>não</b> possui <b>projetos</b></string>
     <string name="static_not_found_search">Usuário <b>não</b> encontrado</string>
@@ -23,9 +24,12 @@
     <string name="bio_not_found">Não foi possível encontrar o perfil!</string>
     <string name="wrong_place">Não deveria estar aqui!</string>
     <string name="save_request">Deseja salvar nos favoritos?</string>
-    <string name="save_request_description">Esse repositório será salvo nos favoritos na tela inicial.</string>
+    <string name="save_request_description">Esse perfil será salvo nos favoritos na tela inicial.</string>
     <string name="save">Salvar</string>
     <string name="no_conection">Sem conexão com a rede</string>
     <string name="uknown_error">Erro desconhecido</string>
     <string name="menu_favoritos">favoritos</string>
+    <string name="fields_messages">Campo de texto invalido!</string>
+    <string name="best_matched">Os mais <b>populares</b></string>
+    <string name="top_10">Top 10 dos <b>mais avaliados</b></string>
 </resources>

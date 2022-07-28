@@ -10,7 +10,9 @@
     <color name="gray_lil_light_transparent">#32A1A3A5</color>
     <color name="light_gray">#E6E6E6</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_brown">#F9D6A5</color>
+    <color name="sand_color">#F9D6A5</color>
+    <color name="purple_light_color">#B9B3DA</color>
+    <color name="mint_color">#A4F2D3</color>
     <color name="ice_light">#F5EAEA</color>
     <color name="black_transparent">#1A000000</color>
     <color name="github_color_gray">#f7f8fa</color>

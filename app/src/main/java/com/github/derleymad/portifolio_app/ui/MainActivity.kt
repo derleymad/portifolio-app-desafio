@@ -2,15 +2,20 @@ package com.github.derleymad.portifolio_app.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.derleymad.portifolio_app.App
 import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.databinding.ActivityMainBinding
 import com.github.derleymad.portifolio_app.model.Bio
+import com.github.derleymad.portifolio_app.model.BioFav
 import com.github.derleymad.portifolio_app.model.Repos
 import com.github.derleymad.portifolio_app.ui.adapters.RepoAdapter
 import com.github.derleymad.portifolio_app.utils.BioRequest
@@ -22,6 +27,7 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: RepoAdapter
     private var repos = mutableListOf<Repos>()
+    private lateinit var favBioFav: BioFav
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +39,6 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
         adapter = RepoAdapter(repos) {
             val intent = Intent(this@MainActivity, RepoActivity::class.java)
             intent.putExtra("full_name", it.fullName)
-            intent.putExtra("description", it.description)
-            intent.putExtra("avatar_link", it.avatarUrl)
-            intent.putExtra("language", it.language)
-            intent.putExtra("name", it.name)
             startActivity(intent)
         }
 
@@ -56,9 +58,44 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
         supportActionBar?.title = null
     }
 
+    private fun openDialogAndSaveIntoDB() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.save_request))
+            .setMessage(getString(R.string.save_request_description))
+            .setPositiveButton(getString(R.string.save)) { _, _ ->
+                val app = (application as App)
+                val dao = app.db.favDao()
+                Thread {
+                    try {
+                        dao.insert(favBioFav)
+                    } finally {
+                        runOnUiThread {
+                            Toast.makeText(
+                                applicationContext,
+                                "Salvo com sucesso",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }.start()
+            }
+            .setNegativeButton(android.R.string.cancel) { _, _ ->
+            }
+            .create()
+            .show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
+        }
+        if(item.itemId == R.id.menu_favoritos){
+            openDialogAndSaveIntoDB()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -70,6 +107,17 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
     //REQUEST FROM BIO
 
     override fun onResult(bio: Bio) {
+
+//        this.favBioFav.copy(
+//            avatarUrl = bio.avatar_url,
+//            login = bio.login,
+//            publicRepos = bio.public_repos,
+//            company = bio.company,
+//            location = bio.location,
+//            following = bio.following,
+//            followers = bio.followers
+//        )
+
         binding.tvName.text =
             bio.login.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
         binding.tvDesc.text = bio.bio
@@ -112,7 +160,6 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
     }
 
     //RESQUEST FROM REPO
-
     override fun onPreExecuteRepo() {
         binding.progressBarRepo.visibility = View.VISIBLE
     }

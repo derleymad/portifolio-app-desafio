@@ -72,11 +72,14 @@ import javax.net.ssl.HttpsURLConnection
                 SearchBio(
                     login = userJson.getString("login"),
                     id = userJson.getInt("id"),
-                    avatar_url = userJson.getString("avatar_url")
+                    avatar_url = userJson.getString("avatar_url"),
+                    url = userJson.getString("url")
                 )
             )
         }
         return search
     }
+
+
 
 }
