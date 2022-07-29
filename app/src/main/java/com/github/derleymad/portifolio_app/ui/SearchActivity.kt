@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -16,9 +17,11 @@ import com.github.derleymad.portifolio_app.model.SearchBio
 import com.github.derleymad.portifolio_app.ui.adapters.AvatarsAdapter
 import com.github.derleymad.portifolio_app.ui.adapters.FavBioAdapter
 import com.github.derleymad.portifolio_app.ui.adapters.SearchAdapter
+import com.github.derleymad.portifolio_app.utils.BioSearchBestRequest
 import com.github.derleymad.portifolio_app.utils.BioSearchRequest
+import com.squareup.picasso.Picasso
 
-class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
+class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearchBestRequest.Callback {
 
     private lateinit var binding: ActivitySearchBinding
     private lateinit var adapter: FavBioAdapter
@@ -37,7 +40,13 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnCloseRvSearch.setOnClickListener {
+            binding.containerRvSearch.visibility = View.GONE
+            binding.linearContainerBest.visibility = View.VISIBLE
+        }
+
         if (checkNetwork()) {
+            BioSearchBestRequest(this@SearchActivity).execute("https://api.github.com/search/users?q=a&sort=followers")
             binding.searchBtn.setOnClickListener {
                 if (!validate()) {
                     Toast.makeText(this, R.string.fields_messages, Toast.LENGTH_SHORT).show()
@@ -46,8 +55,11 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
                 hideKeyBoard()
                 BioSearchRequest(this@SearchActivity)
                     .execute("https://api.github.com/search/users?q=${binding.editSearchEdit.text.toString()}&per_page=10")
+
             }
         } else {
+            binding.linearContainerBest.visibility = View.INVISIBLE
+            binding.linearContainerConection.visibility = View.VISIBLE
             binding.searchBtn.setOnClickListener {
                 Toast.makeText(this@SearchActivity, getString(R.string.no_conection), Toast.LENGTH_LONG).show()
             }
@@ -59,7 +71,6 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
         bio.add(
             BioFav(login = "teste login", avatarUrl = "testeavatar", company = "Company teste", location = "teste location", publicRepos = 123, followers = 123, following = 999)
         )
-
 
         //SEARCH ADAPTER AND RECYCLERVIEW
         adapterSearch = SearchAdapter(search){
@@ -119,8 +130,6 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
 //            }
 //        }.start()
 //        adapter.notifyDataSetChanged()
-//        binding.rvSearch.visibility = View.INVISIBLE
-//        binding.imgSearch.visibility = View.VISIBLE
         super.onResume()
     }
 
@@ -132,7 +141,8 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
         this.search.clear()
         this.search.addAll(search)
         binding.progressBar.visibility = View.INVISIBLE
-        binding.rvSearch.visibility = View.VISIBLE
+        binding.linearContainerBest.visibility = View.INVISIBLE
+        binding.containerRvSearch.visibility = View.VISIBLE
         adapterSearch.notifyDataSetChanged()
     }
 
@@ -142,5 +152,26 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback {
         Toast.makeText(this@SearchActivity,getString(R.string.bio_not_found),Toast.LENGTH_SHORT).show()
     }
 
+    override fun onPreExecuteBest() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    override fun onResultBest(best: List<SearchBio>) {
+        Log.i("result",best.toString())
+        this.avatars.clear()
+        this.avatars.addAll(best)
+        adapterAvatars.notifyDataSetChanged()
+        binding.nameBest.text = best[0].login
+        Picasso.get()
+            .load(best[0].avatar_url)
+            .error(R.drawable.avatar_placeholder)
+            .placeholder(R.drawable.avatar_placeholder)
+            .into(binding.imgAvatarBest)
+        binding.progressBar.visibility = View.GONE
+    }
+
+    override fun onFailureBest(message: String) {
+        Toast.makeText(this@SearchActivity,getString(R.string.bio_not_found),Toast.LENGTH_SHORT).show()
+    }
 
 }

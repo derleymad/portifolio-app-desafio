@@ -6,6 +6,7 @@ import android.os.Looper
 import android.util.Log
 import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.model.Bio
+import com.github.derleymad.portifolio_app.model.SearchBio
 import com.github.derleymad.portifolio_app.ui.MainActivity
 import org.json.JSONObject
 import java.io.InputStream

@@ -31,7 +31,7 @@ class AvatarsAdapter(private val list: MutableList<SearchBio>) : RecyclerView.Ad
             Picasso.get()
                 .load(currentItem.avatar_url)
                 .error(R.drawable.avatar_placeholder)
-                .placeholder(R.drawable.avatar_placeholder)
+                .placeholder(R.drawable.placeholder_repo)
                 .into(avatar)
         }
     }

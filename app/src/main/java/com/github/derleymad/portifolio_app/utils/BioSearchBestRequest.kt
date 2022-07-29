@@ -13,20 +13,19 @@ import java.net.URL
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
-
- class BioSearchRequest (private val callback: SearchActivity){
+class BioSearchBestRequest (private val callback: SearchActivity){
 
     private val handler = Handler(Looper.getMainLooper())
     private val executor = Executors.newSingleThreadExecutor()
 
     interface Callback{
-        fun onPreExecute()
-        fun onResult(search: List<SearchBio>)
-        fun onFailure(message: String)
+        fun onPreExecuteBest()
+        fun onResultBest(best: List<SearchBio>)
+        fun onFailureBest(message: String)
     }
 
     fun execute(url:String){
-        callback.onPreExecute()
+        callback.onPreExecuteBest()
         executor.execute{
             var urlConnection: HttpsURLConnection? = null
             var stream : InputStream? = null
@@ -45,13 +44,13 @@ import javax.net.ssl.HttpsURLConnection
                 stream = urlConnection.inputStream
                 val jsonAsString = stream.bufferedReader().use { it.readText() }
 
-                val search = toSearch(jsonAsString)
-                handler.post{callback.onResult(search)}
+                val best = toBest(jsonAsString)
+                handler.post{callback.onResultBest(best)}
 
-            }catch (e:NetworkErrorException){
+            }catch (e: NetworkErrorException){
                 val message = e.message ?: callback.getString(R.string.uknown_error)
                 Log.e("Teste",message,e)
-                handler.post { callback.onFailure(message)  }
+                handler.post { callback.onFailureBest(message)  }
             }finally {
                 urlConnection?.disconnect()
                 stream?.close()
@@ -59,16 +58,15 @@ import javax.net.ssl.HttpsURLConnection
         }
     }
 
-    private fun toSearch(jsonAsString: String): List<SearchBio> {
-        val search = mutableListOf<SearchBio>()
+    private fun toBest(jsonAsString: String): List<SearchBio> {
+        val best = mutableListOf<SearchBio>()
         val jsonRoot = JSONObject(jsonAsString)
 
         val jsonItems = jsonRoot.getJSONArray("items")
 
         for (i in 0 until jsonItems.length()) {
             val userJson = jsonItems.getJSONObject(i)
-
-            search.add(
+            best.add(
                 SearchBio(
                     login = userJson.getString("login"),
                     id = userJson.getInt("id"),
@@ -77,6 +75,6 @@ import javax.net.ssl.HttpsURLConnection
                 )
             )
         }
-        return search
+        return best
     }
 }
