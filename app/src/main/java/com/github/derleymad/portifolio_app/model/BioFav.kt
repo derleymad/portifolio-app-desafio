@@ -10,9 +10,5 @@ data class BioFav(
     @ColumnInfo(name = "type") val type: String = "bio",
     @ColumnInfo(name = "login") val login: String,
     @ColumnInfo(name = "avatarUrl") val avatarUrl: String = "",
-    @ColumnInfo(name = "company") val company: String = "",
-    @ColumnInfo(name = "location") val location: String = "",
     @ColumnInfo(name = "publicRepos") val publicRepos: Int = 0,
-    @ColumnInfo(name = "followers") val followers: Int = 0,
-    @ColumnInfo(name = "following") val following: Int = 0
 )

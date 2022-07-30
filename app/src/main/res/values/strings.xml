@@ -20,7 +20,7 @@
     <string name="search_image">Imagem de uma mulher com uma lupa</string>
     <string name="right_arrow">Flecha para direita</string>
     <string name="placeholder">Imagem cinza</string>
-    <string name="no_description">Projeto sem descrição!</string>
+    <string name="no_description">Sem descrição!</string>
     <string name="bio_not_found">Não foi possível encontrar o perfil!</string>
     <string name="wrong_place">Não deveria estar aqui!</string>
     <string name="save_request">Deseja salvar nos favoritos?</string>
@@ -32,4 +32,11 @@
     <string name="fields_messages">Campo de texto invalido!</string>
     <string name="best_matched">Os mais <b>populares</b></string>
     <string name="top_10">Top 10 dos <b>mais avaliados</b></string>
+    <string name="static_the_top_one">O top 1</string>
+    <string name="most_popular">O mais mopular</string>
+    <string name="remove_db">Deseja remover dos favoritos?</string>
+    <string name="remove_request_description">Estem item será removido da tela inicial</string>
+    <string name="remove">Remover</string>
+    <string name="save_sucess">Salvo com sucesso!</string>
+    <string name="removed_sucess">Removido com sucesso!</string>
 </resources>

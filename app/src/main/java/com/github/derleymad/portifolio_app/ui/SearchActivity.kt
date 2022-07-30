@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.derleymad.portifolio_app.App
 import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.databinding.ActivitySearchBinding
 import com.github.derleymad.portifolio_app.model.BioFav
@@ -55,7 +57,6 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearch
                 hideKeyBoard()
                 BioSearchRequest(this@SearchActivity)
                     .execute("https://api.github.com/search/users?q=${binding.editSearchEdit.text.toString()}&per_page=10")
-
             }
         } else {
             binding.linearContainerBest.visibility = View.INVISIBLE
@@ -64,13 +65,6 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearch
                 Toast.makeText(this@SearchActivity, getString(R.string.no_conection), Toast.LENGTH_LONG).show()
             }
         }
-
-        avatars.add(
-            SearchBio(id=1,login = "teste", avatar_url = "asd", url = "asd")
-        )
-        bio.add(
-            BioFav(login = "teste login", avatarUrl = "testeavatar", company = "Company teste", location = "teste location", publicRepos = 123, followers = 123, following = 999)
-        )
 
         //SEARCH ADAPTER AND RECYCLERVIEW
         adapterSearch = SearchAdapter(search){
@@ -88,15 +82,66 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearch
         binding.rvAvatars.layoutManager = LinearLayoutManager(this@SearchActivity,LinearLayoutManager.HORIZONTAL,false)
 
         //FAVORITOS ADAPTER AND RECYCLER VIE
-        adapter = FavBioAdapter(bio){
-            val intent = Intent(this@SearchActivity,RepoActivity::class.java)
-            intent.putExtra("full_name",it)
-            startActivity(intent)
-        }
+        adapter = FavBioAdapter(bio,
+            {id ->
+                val intent = Intent(this@SearchActivity,MainActivity::class.java)
+                intent.putExtra("name",id)
+                startActivity(intent)
+        },{id,position -> openDialogAndRemoveIntoDB(id,position)}
+        )
+
         binding.rvFavoritos.adapter = adapter
-        linearlayout = LinearLayoutManager(this@SearchActivity,LinearLayoutManager.HORIZONTAL,true)
-        linearlayout.stackFromEnd = true
+        linearlayout = LinearLayoutManager(this@SearchActivity,LinearLayoutManager.HORIZONTAL,false)
         binding.rvFavoritos.layoutManager = linearlayout
+
+    }
+
+    private fun searchIntoDBandUpdateAdapter(){
+        Thread {
+            val app = application as App
+            val dao = app.db.favDao()
+            val response = dao.getRegisterByType("bio")
+                Log.i("teste", response.toString())
+                runOnUiThread {
+                    //atualizando adapter
+                    bio.clear()
+                    bio.addAll(response)
+                    adapter.notifyDataSetChanged()
+                }
+        }.start()
+    }
+
+    private fun openDialogAndRemoveIntoDB(id:Int,position:Int) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.remove_db))
+            .setMessage(getString(R.string.remove_request_description))
+            .setPositiveButton(getString(R.string.remove)) { _, _ ->
+
+                val app = (application as App)
+                val dao = app.db.favDao()
+
+                Thread {
+                    val response = dao.getRegisterByid(id)
+                    try {
+                        dao.delete(response)
+                        bio.removeAt(position)
+
+                    } finally {
+                        runOnUiThread {
+                            adapter.notifyItemRemoved(position-1 )
+                            Toast.makeText(
+                                applicationContext,
+                                getString(R.string.removed_sucess),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }.start()
+            }
+            .setNegativeButton(android.R.string.cancel) { _, _ ->
+            }
+            .create()
+            .show()
     }
 
     private fun checkNetwork() : Boolean{
@@ -116,20 +161,14 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearch
         service.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 
+    override fun onStart() {
+        Log.i("testing","onStart")
+        super.onStart()
+    }
+
     override fun onResume() {
-//        Thread {
-//            val app = application as App
-//            val dao = app.db.favDao()
-//            val response = dao.getRegisterByType("bio")
-//            Log.i("teste", response.toString())
-//            runOnUiThread {
-//                //atualizando adapter
-//                bio.clear()
-//                bio.addAll(response)
-//                adapter.notifyDataSetChanged()
-//            }
-//        }.start()
-//        adapter.notifyDataSetChanged()
+        Log.i("testing","onResume")
+        searchIntoDBandUpdateAdapter()
         super.onResume()
     }
 
@@ -173,5 +212,4 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearch
     override fun onFailureBest(message: String) {
         Toast.makeText(this@SearchActivity,getString(R.string.bio_not_found),Toast.LENGTH_SHORT).show()
     }
-
 }

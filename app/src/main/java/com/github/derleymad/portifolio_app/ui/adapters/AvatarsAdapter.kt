@@ -9,7 +9,9 @@ import com.github.derleymad.portifolio_app.R
 import com.github.derleymad.portifolio_app.model.SearchBio
 import com.squareup.picasso.Picasso
 
-class AvatarsAdapter(private val list: MutableList<SearchBio>) : RecyclerView.Adapter<AvatarsAdapter.AvatarsViewHolder>() {
+class AvatarsAdapter(
+    private val list: MutableList<SearchBio>
+    ) : RecyclerView.Adapter<AvatarsAdapter.AvatarsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AvatarsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.avatar_item,parent,false)
@@ -25,7 +27,7 @@ class AvatarsAdapter(private val list: MutableList<SearchBio>) : RecyclerView.Ad
         return list.size
     }
 
-    class AvatarsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class AvatarsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(currentItem:SearchBio){
             val avatar = itemView.findViewById<ImageView>(R.id.img_avatar_repo)
             Picasso.get()

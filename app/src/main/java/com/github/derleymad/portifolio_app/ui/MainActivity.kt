@@ -2,7 +2,6 @@ package com.github.derleymad.portifolio_app.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: RepoAdapter
     private var repos = mutableListOf<Repos>()
-    private lateinit var favBioFav: BioFav
+    private var bioFav = mutableListOf<BioFav>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,12 +66,12 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
                 val dao = app.db.favDao()
                 Thread {
                     try {
-                        dao.insert(favBioFav)
+                        dao.insert(bioFav[0])
                     } finally {
                         runOnUiThread {
                             Toast.makeText(
                                 applicationContext,
-                                "Salvo com sucesso",
+                                getString(R.string.save_sucess),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -105,19 +104,13 @@ class MainActivity : AppCompatActivity(), BioRequest.Callback, RepoRequest.Callb
     }
 
     //REQUEST FROM BIO
-
     override fun onResult(bio: Bio) {
-
-//        this.favBioFav.copy(
-//            avatarUrl = bio.avatar_url,
-//            login = bio.login,
-//            publicRepos = bio.public_repos,
-//            company = bio.company,
-//            location = bio.location,
-//            following = bio.following,
-//            followers = bio.followers
-//        )
-
+        bioFav.clear()
+        bioFav.add(BioFav(
+            login = bio.login,
+            avatarUrl = bio.avatar_url,
+            publicRepos = bio.public_repos
+        ))
         binding.tvName.text =
             bio.login.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
         binding.tvDesc.text = bio.bio
