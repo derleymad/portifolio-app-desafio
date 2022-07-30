@@ -48,6 +48,10 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearch
         }
 
         if (checkNetwork()) {
+            binding.btnSeee.setOnClickListener {
+                //TODO IR PARA REPO DO MAIS POPULAR
+            }
+
             BioSearchBestRequest(this@SearchActivity).execute("https://api.github.com/search/users?q=a&sort=followers")
             binding.searchBtn.setOnClickListener {
                 if (!validate()) {
@@ -112,6 +116,7 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearch
     }
 
     private fun openDialogAndRemoveIntoDB(id:Int,position:Int) {
+        //TODO Remover bug de deteletar todos is favoritados
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.remove_db))
             .setMessage(getString(R.string.remove_request_description))
@@ -128,7 +133,9 @@ class SearchActivity : AppCompatActivity(), BioSearchRequest.Callback, BioSearch
 
                     } finally {
                         runOnUiThread {
-                            adapter.notifyItemRemoved(position-1 )
+
+                            //TODO Fazer adapter.notifyItemRemoved() para apenas o item removido
+                            searchIntoDBandUpdateAdapter()
                             Toast.makeText(
                                 applicationContext,
                                 getString(R.string.removed_sucess),

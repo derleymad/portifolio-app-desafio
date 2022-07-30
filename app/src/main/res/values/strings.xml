@@ -32,7 +32,7 @@
     <string name="fields_messages">Campo de texto invalido!</string>
     <string name="best_matched">Os mais <b>populares</b></string>
     <string name="top_10">Top 10 dos <b>mais avaliados</b></string>
-    <string name="static_the_top_one">O top 1</string>
+    <string name="static_the_top_one">#top1</string>
     <string name="most_popular">O mais mopular</string>
     <string name="remove_db">Deseja remover dos favoritos?</string>
     <string name="remove_request_description">Estem item será removido da tela inicial</string>

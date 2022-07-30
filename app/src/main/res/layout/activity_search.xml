@@ -209,7 +209,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/materialButton2"
+                    android:id="@+id/btn_seee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
@@ -245,10 +245,10 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="12dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/materialButton2"
-                    app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_seee"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_seee"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/materialButton2"
+                    app:layout_constraintTop_toTopOf="@+id/btn_seee"
                     tools:listitem="@layout/avatar_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

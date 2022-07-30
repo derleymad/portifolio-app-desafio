@@ -20,6 +20,7 @@ class RepoActivity : AppCompatActivity() {
         fullName = intent?.extras?.getString("full_name", "derleymad/portifolio-app-desafio")
             ?: throw IllegalStateException(wrongPlace)
 
+        binding.wvRepo.settings.javaScriptEnabled = true
         binding.wvRepo.loadUrl("https://github.com/$fullName")
 
         val toolBar: Toolbar = findViewById(R.id.wb_toolbar)
